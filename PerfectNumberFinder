@@ -1,0 +1,80 @@
+ /* By: Sean Tozier
+ * Name: PerfectNumberFinder.java
+ * Purpose: To find perfect numbers.
+ */
+
+import java.util.Scanner;
+
+public class PerfectNumberFinder {
+static int count=1,sum=0;
+
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+
+        int choice, integer;
+
+           while(true){
+              sum=0;
+              count=1;
+            System.out.println("*********************************");
+            System.out.println("      Perfect Number Finder      ");
+            System.out.println("          1 = Continue           ");
+            System.out.println("            0 = Quit             ");
+            System.out.println("*********************************");
+            choice=input.nextInt();
+
+            if(choice==0){
+                break;
+            }
+            if(choice==1){
+                System.out.println("Please input an integer");
+                
+                integer=input.nextInt();
+                int x=integer;
+                
+               
+                divisorSum(integer); //Calls the second method
+                if(x==divisorSum(integer)){
+                    System.out.println(integer + " is a perfect number.");
+                    
+                    
+                }else if(x<divisorSum(integer)){
+                    System.out.println(integer + " is a abundant number.");
+                    
+                }else if(x>divisorSum(integer)){
+                    System.out.println(integer + " is a deficient number.");
+                    
+                }
+            }
+
+           }
+
+    }
+
+    public static int divisorSum (int number){ //Used to calculate the sum of the divisors
+        int y=1;
+        while(count<number){
+            if(isDivisor(number,y)==true){
+                
+                sum=sum+y;
+                y++;
+                count++;
+            }else if(isDivisor(number,y)==false){
+            y++;
+            count++;
+            }
+        }
+        
+        return sum;
+    }
+    public static boolean isDivisor (int num, int divisor) { //Used to show if a number is divisible by another number
+        if(num%divisor==0){ //If the Number and divisor work then there are no remainders.
+            return true;
+        }else{
+            return false;
+        }
+
+  }
+
+
+}
