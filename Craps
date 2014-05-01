@@ -1,0 +1,115 @@
+ /* By: Sean Tozier
+ * Name: Craps.java
+ * Purpose: To play the game of Craps.
+ */
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Craps {
+
+    static Random r = new Random();
+
+    public static void main(String[] args) {
+
+        double bankroll, bet;
+        int x = 0;
+        int y = 0;
+        int roll = 0;
+        int anything = 0;
+        int choice = 0;
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("****************************");
+        System.out.println("Welcome to the game of Craps");
+        System.out.println("        1 = Continue        ");
+        System.out.println("          0 = Quit          ");
+        System.out.println("****************************");
+
+        choice = input.nextInt();
+
+        if (choice == 1) {
+            System.out.println("Please provide your bankroll");
+            bankroll = input.nextDouble();
+            while (true) {
+                System.out.println("How much would you like to bet?");
+                bet = input.nextInt();
+                System.out.println("Rolling dice...");
+                int n = r.nextInt(6) + 1;
+                int m = r.nextInt(6) + 1;
+                System.out.println("Number 1" + n);
+                System.out.println("Number 2" + m);
+                x = n + m; //Decides your first roll in the game
+                if (n + m == 7 || n + m == 11) { //Defines the winning numbers
+                    System.out.println("You Win!");
+                    bet = bet * 2;
+                    bankroll = bankroll + bet;
+                    System.out.println("You currently have $" + bankroll + " remaining.");
+                    System.out.println("Would you like to continue or quit?");
+                    System.out.println("     Anything = Continue 0 = Quit  ");
+                    choice = input.nextInt();
+                    if (choice == 0) {
+                        break;
+                    }
+                }
+                if (n + m == 2 || n + m == 12 || n + m == 3) { //Defines the losing numbers
+                    System.out.println("You Lose!");
+                    bankroll = bankroll - bet;
+                    System.out.println("You currently have $" + bankroll + " remaining.");
+
+
+                    System.out.println("Would you like to continue or quit?");
+                    System.out.println("    Anything = Continue 0 = Quit   ");
+                    choice = input.nextInt();
+                    if (choice == 0) {
+                        break;
+                    }
+
+                }
+                if (x != 7 && x != 11 && x != 2 && x != 12 && x != 3) { //Defines the numbers that aren't winning or losing
+                    System.out.println("You didn't roll a winning or losing number");
+                    System.out.println("To reroll to roll the point enter anything");
+                    anything = input.nextInt();
+
+                    while (y != 7 && y != x) { //Defines the numbers that aren't winning or losing
+                        n = r.nextInt(6) + 1;
+                        m = r.nextInt(6) + 1;
+                        y = n + m;
+                        System.out.println("Number 1" + n);
+                System.out.println("Number 2" + m);
+                        System.out.println("You didn't roll a winning or losing number.");
+                        System.out.println("Enter anything to continue");
+                        anything = input.nextInt();
+                        System.out.println("Rolling dice...");
+                    }
+                    if (y == 7) { //Defines crapping out
+                        System.out.println("You rolled a 7 and lost!");
+                        bankroll = bankroll - bet;
+                        System.out.println("You currently have $" + bankroll + " remaining.");
+                        System.out.println("Would you like to continue or quit?");
+                        System.out.println("    Anything = Continue 0 = Quit   ");
+                        choice = input.nextInt();
+                        if (choice == 0) {
+                            break;
+                        }
+                    }
+                    if (y == x) { //Defines rolling the same number and winning
+                        System.out.println("You rerolled the point and won!");
+                        bet = bet * 2;
+                        bankroll = bankroll + bet;
+                        System.out.println("You currently have $" + bankroll + " remaining.");
+                        System.out.println("Would you like to continue or quit?");
+                        System.out.println("    Anything = Continue 0 = Quit   ");
+                        choice = input.nextInt();
+                        if (choice == 0) {
+                            break;
+                        }
+
+                    }
+
+                }
+            }
+        }
+    }
+}
