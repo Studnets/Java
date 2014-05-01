@@ -1,0 +1,55 @@
+/* By: Sean Tozier
+ * Name: TriangleCaluclator.java
+ * Purpose: To find out if certain measures make a triangle and what type.
+ */
+
+import java.util.Scanner;
+
+public class TriangleCalculator {
+
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+        while (true) {
+
+            double side1, side2, side3, longest;
+            int choice;
+
+            System.out.println("*********************************");
+            System.out.println("       Triangle Calculator       ");
+            System.out.println("          1 = Continue           ");
+            System.out.println("            0 = Quit             ");
+            System.out.println("*********************************");
+
+            choice = input.nextInt();
+
+            if (choice == 0) {
+                break;
+
+            }
+            if (choice == 1) {
+                System.out.println("Input the length of the first side.");
+                side1 = input.nextDouble();
+                System.out.println("Input the length of the second side.");
+                side2 = input.nextDouble();
+                System.out.println("Input the length of the third side.");
+                side3 = input.nextDouble();
+                longest = Math.max(side1, side2);
+                longest = Math.max(side1, side3);
+                longest = Math.max(side2, side3);
+
+                if (side1 == side2 && side1 == side3 && side2 == side3) { // Formula for an equilateral triangle
+                    System.out.println("This is an Equilateral Triangle!");
+                }else if(side1 != side2 && side1 != side3 && side2 != side3 ){ //Formula for a scalene triangle
+                    System.out.println("This is an Scalene Triangle!");
+                }else if(longest>=(side1+side2) || longest>=(side1+side3) || longest>=(side2+side3)){ //Formula for not being a triangle
+                    System.out.println("This is an Not a Triangle!");
+                }else{
+                    System.out.println("This is an Isosceles Triangle!"); //Defines an isosceles triangle
+                }
+
+            }
+
+        }
+    }
+}
